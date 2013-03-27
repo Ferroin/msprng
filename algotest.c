@@ -39,9 +39,9 @@ void main() {
     read(0, ((char *) &x), 1);
     read(0, ((char *) &y), 1);
     while (1) {
-        t = x ^ (x << 2) ^ _swpb(_rotr(y, 1));
+        t = x ^ (x << 2);
         x = y; y = z; z = w;
-        w = w ^ _rotr(_swpb(w), 3) ^ (t ^ (t << 1));
+        w = w ^ _rotr(w, 3) ^ (t ^ (t << 5));
         printf("%c%c", ((w & 0xFF00) >> 8), (w & 0xFF));
     }
 }
