@@ -23,10 +23,6 @@
 ; Initialize SP
         mov     #0x027f, r1
 
-; Minimize clock frequency
-        clr.b   &0x0056
-        mov.b   #0x80,  &0x0057
-
 ; USI Initialization
         bis.b   #0x01,  &0x0078
         mov     #0x01f3,&0x0078
