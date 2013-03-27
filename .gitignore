@@ -1,0 +1,7 @@
+.*.swp
+*~
+*.bak
+*.o
+algotest
+*.ihx
+*.list
