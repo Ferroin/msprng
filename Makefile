@@ -13,10 +13,10 @@ algotest : algotest.c
 	$(CC) $(CFLAGS) -o algotest algotest.c
 
 dieharder.txt : algotest
-	algotest < /dev/random | dieharder -g 200 -a -k 2 -Y 1 -m 10 | tee dieharder.txt
+	./algotest < /dev/random | dieharder -g 200 -a -k 2 -Y 1 -m 10 | tee dieharder.txt
 
 fips.txt : algotest
-	algotest < /dev/random | rngtest -c 1048576 | tee fips.txt
+	./algotest < /dev/random | rngtest -c 1048576 | tee fips.txt
 
 clean :
 	rm -f msprng.ihx msprng.o msprng.list algotest
