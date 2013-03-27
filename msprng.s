@@ -62,6 +62,10 @@
         rla      r4
         xor      r5,     r4
         mov      r6,     r5
+        mov      r6,     r9
+        rra      r9
+        swpb     r9
+        xor      r9,     r4
         mov      r7,     r6
         mov      r8,     r7
         mov      r8,     r9
