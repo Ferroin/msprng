@@ -1,4 +1,4 @@
-.PHONY: clean
+.PHONY: clean tests
 
 CC := gcc
 CFLAGS := -O3
@@ -11,6 +11,8 @@ msprng.o : msprng.s
 
 algotest : algotest.c
 	$(CC) $(CFLAGS) -o algotest algotest.c
+
+tests : dieharder.txt fips.txt
 
 dieharder.txt : algotest
 	./algotest < /dev/random | dieharder -g 200 -a -k 2 -Y 1 -m 10 | tee dieharder.txt
