@@ -89,20 +89,24 @@
 
 .org 0xfd00
 ; Port 1 Pin Change Interrupt Handler
-; (Used to emulate chip select)
-        cmp.b   #0x04,  &0x0024
+; Used to emulate chip select on P1.4, this pin needs to be normally low,
+; and needs to be held high during SPI communication.
+        cmp.b   #0x08,  &0x0024
         jne      0x0016
         bic.b   #0x1f,  &0x007b
         bis.b   #0x08,  &0x007b
         bic.b   #0x01,  &0x0078
-        bic.b   #0x04,  &0x0024
+        bic.b   #0x08,  &0x0024
         jmp      0x0008
         bis.b   #0x01,  &0x0078
-        bis.b   #0x04,  &0x0024
+        bis.b   #0x08,  &0x0024
         reti
 
 .org 0xfd80
 ; USI Interrupt Handler
+; This is used for SPI communication.  Note that P1.3 will be held high
+; when we can't recieve any data, the SPI master should check this pin
+; after each byte, and only transmit the next byte when it is low.
         bis.b   #0x04,  &0x0021
         bis.b   #0x01,  &0x0078
         cmp.b   #0x50,  &0x007c
@@ -128,16 +132,25 @@
 
 .org 0xfe00
 ; Function for command 0x50 (STOP)
+; When we recieve the command 0x50, we stop iterating the random number
+; generator.
         clr      r15
         br      #0xfda8
 
 .org 0xfe10
 ; Function for command 0x51 (START)
+; When we recieve the command 0x51, we start iterating the RNG.
+; This command needs to be issued before we can get any random data.
         inc      r15
         br      #0xfda8
 
 .org 0xfe20
 ; Function for command 0x52 (GET)
+; When we recieve the command 0x52, we send the contents of r11 (the
+; output of the RNG algorithm).  For this to return anything useful,
+; you need to first seed the RNG (see the next command) and have
+; previously sent a START (0x51) command.  For best results, this should
+; be issued with a freqency of no more than 100Hz.
         mov      r11,   &0x007c
         bic.b   #0x1f,  &0x007b
         bis.b   #0x10,  &0x007b
@@ -145,6 +158,10 @@
 
 .org 0xfe40
 ; Function for command 0x53 (SEED)
+; When we recieve the command 0x53, we wait listen (with no timeout)
+; for the next 2 bytes, then use those bytes to ressed the generator.
+; For good quality entropy, the seed should be from a reliable entropy
+; source.
         bic.b   #0x1f,  &0x007b
         bis.b   #0x10,  &0x007b
         bic.b   #0x01,  &0x0078

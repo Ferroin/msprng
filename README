@@ -1,1 +1,10 @@
-msprng: A pseudo-random number generator for the MSP430
+msprng: A pseudo-random number generator on the MSP430
+
+msprng is a program for using a MSP430G2xxx mcu as a pseudo-random number
+generator.  Note that this is not a hardware random number generator,
+and is not suitable for cryptographic purposes.  If you want a higher
+quality source of random bits, use multiple MSP430s with different seeds,
+then XOR the output from them.
+
+Communication is via SPI, with a seperate IO line for flow control.
+For specifics on the protocol, check the source code.
