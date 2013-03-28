@@ -41,7 +41,7 @@ void main() {
     while (1) {
         t = x ^ (x << 2);
         x = y; y = z; z = w;
-        w = w ^ _rotr(w, 3) ^ (t ^ (t << 5));
+        w = w ^ _rotr(w, 3) ^ (_swpb(t) ^ (t << 5));
         printf("%c%c", ((w & 0xFF00) >> 8), (w & 0xFF));
     }
 }

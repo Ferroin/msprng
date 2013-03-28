@@ -4,13 +4,13 @@ This is free software; see the source for copying conditions.  There is NO warra
 
 rngtest: starting FIPS tests...
 rngtest: bits received from input: 20000000032
-rngtest: FIPS 140-2 successes: 999196
-rngtest: FIPS 140-2 failures: 804
-rngtest: FIPS 140-2(2001-10-10) Monobit: 103
-rngtest: FIPS 140-2(2001-10-10) Poker: 103
-rngtest: FIPS 140-2(2001-10-10) Runs: 330
-rngtest: FIPS 140-2(2001-10-10) Long run: 273
+rngtest: FIPS 140-2 successes: 999247
+rngtest: FIPS 140-2 failures: 753
+rngtest: FIPS 140-2(2001-10-10) Monobit: 87
+rngtest: FIPS 140-2(2001-10-10) Poker: 104
+rngtest: FIPS 140-2(2001-10-10) Runs: 270
+rngtest: FIPS 140-2(2001-10-10) Long run: 296
 rngtest: FIPS 140-2(2001-10-10) Continuous run: 0
-rngtest: input channel speed: (min=2.047; avg=6594.895; max=19073.486)Mibits/s
-rngtest: FIPS tests speed: (min=3.075; avg=73.320; max=135.273)Mibits/s
-rngtest: Program run time: 263225509 microseconds
+rngtest: input channel speed: (min=2.602; avg=9197.609; max=19073.486)Mibits/s
+rngtest: FIPS tests speed: (min=2.885; avg=101.564; max=136.239)Mibits/s
+rngtest: Program run time: 190009768 microseconds

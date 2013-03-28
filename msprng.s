@@ -38,11 +38,11 @@
         bis.b   #0x08,  &0x0025
 
 ; Alogarithmic Initialization
-        clr      r4
-        clr      r5
-        clr      r6
-        clr      r7
-        clr      r8
+        clr      r4     ; t in algotest
+        clr      r5     ; x in algotest
+        clr      r6     ; y in algotest
+        clr      r7     ; z in algotest
+        clr      r8     ; w in algotest
         clr      r9     ; Temporary storage
         clr      r15
 
@@ -68,6 +68,7 @@
         rra      r9
         xor      r9,     r8
         mov      r4,     r9
+        swpb     r4
         rla      r9
         rla      r9
         rla      r9
