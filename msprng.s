@@ -38,13 +38,17 @@
         bis.b   #0x08,  &0x0025
 
 ; Alogarithmic Initialization
-        clr      r4     ; t in algotest
-        clr      r5     ; x in algotest
-        clr      r6     ; y in algotest
-        clr      r7     ; z in algotest
+        clr      r4     ; s in algotest
+        clr      r5     ; t in algotest
+        clr      r6     ; u in algotest
+        clr      r7     ; v in algotest
         clr      r8     ; w in algotest
-        clr      r9     ; Temporary storage
+        clr      r9     ; x in algotest
+        clr      r10    ; y in algotest
+        clr      r11    ; z in algotest
+        clr      r12    ; Temporary storage
         clr      r15
+        inc      r15
 
 ; Jump to main program
         br      #0xfc80
@@ -54,28 +58,33 @@
         eint
         cmp     #0x0000, r15
         jeq     -0x0006
-        mov      r5,     r4
+        rla      r4
         rla      r4
         rla      r4
         xor      r5,     r4
         mov      r6,     r5
-        xor      r9,     r4
         mov      r7,     r6
         mov      r8,     r7
-        mov      r8,     r9
-        rra      r9
-        rra      r9
-        rra      r9
-        xor      r9,     r8
-        mov      r4,     r9
-        swpb     r4
-        rla      r9
-        rla      r9
-        rla      r9
-        rla      r9
-        rla      r9
-        xor      r4,     r9
-        xor      r9,     r8
+        mov      r9,     r8
+        mov      r10,    r9
+        mov      r11,    r10
+        swpb     r11
+        mov      r4,     r12
+        clrc
+        rrc      r12
+        clrc
+        rrc      r12
+        clrc
+        rrc      r12
+        clrc
+        rrc      r12
+        clrc
+        rrc      r12
+        xor      r12,    r11
+        mov      r7,     r12
+        rla      r12
+        rla      r12
+        xor      r12,    r11
         br      #0xfc82
 
 .org 0xfd00
@@ -129,7 +138,7 @@
 
 .org 0xfe20
 ; Function for command 0x52 (GET)
-        mov      r8,    &0x007c
+        mov      r11,   &0x007c
         bic.b   #0x1f,  &0x007b
         bis.b   #0x10,  &0x007b
         br      #0xfdb2
