@@ -18,7 +18,7 @@ dieharder.txt : algotest
 	./algotest < /dev/random | dieharder -g 200 -a -k 2 -Y 1 -m 10 | tee dieharder.txt
 
 fips.txt : algotest
-	./algotest < /dev/random | rngtest -c 1000000 2>&1 | tee fips.txt
+	./algotest < /dev/random | rngtest -c 100000 2>&1 | tee fips.txt
 
 clean :
 	rm -f msprng.ihx msprng.o msprng.list algotest
